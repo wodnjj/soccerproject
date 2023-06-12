@@ -12,4 +12,5 @@ for i, o in enumerate(team_rank_list):
         break
     rank = o.select('.blind')[0].text
     team = o.select('.name')[0].text
-    print(rank, team)
+    points = o.select('td:last-child > span')[0].text
+    print(rank, team, points)
