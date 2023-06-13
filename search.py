@@ -37,7 +37,7 @@ conn.commit()
 conn.close()
 
 # Search for a team by name
-search_team = input("Enter the team name to search: ")
+search_team = input("팀명을 검색하세요: ")
 
 # Connect to the SQLite database
 conn = sqlite3.connect('team_data.db')
