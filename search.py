@@ -8,11 +8,11 @@ premi_team_rank_list = BeautifulSoup(premi_team_rank.content, "html.parser", fro
 
 team_rank_list = premi_team_rank_list.select('#_team_rank_epl > table > tbody > tr')
 
-# Connect to the SQLite database
+# SQLite database에 연결
 conn = sqlite3.connect('team_data.db')
 cursor = conn.cursor()
 
-# Create the table if it doesn't exist
+# 테이블이 없는 경우 테이블 만들기
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS team_data (
         rank INTEGER,
@@ -21,7 +21,7 @@ cursor.execute('''
     )
 ''')
 
-# Iterate through the team_rank_list and insert the data into the SQLite table
+# team_rank_list를 반복하여 SQLite 테이블에 데이터를 삽입
 for i, o in enumerate(team_rank_list):
     if i >= 7:
         break
@@ -32,14 +32,14 @@ for i, o in enumerate(team_rank_list):
     # Insert the data into the SQLite table
     cursor.execute('INSERT INTO team_data (rank, team_name, points) VALUES (?, ?, ?)', (rank, team, points))
 
-# Commit changes and close the connection
+# 변경 내용 commit 및 연결 닫기
 conn.commit()
 conn.close()
 
-# Search for a team by name
+# 팀 이름으로 검색
 search_team = input("팀명을 검색하세요: ")
 
-# Connect to the SQLite database
+# SQLite 데이터베이스에 연결
 conn = sqlite3.connect('team_data.db')
 cursor = conn.cursor()
 
@@ -54,5 +54,5 @@ if result:
 else:
     print("Team not found.")
 
-# Close the connection
+# 연결 닫기
 conn.close()
